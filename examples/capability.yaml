@@ -1,0 +1,19 @@
+name: filesystem.create_file
+version: 1.0.0
+description: Create a file and verify its contents.
+
+risk:
+  level: low
+
+inputs:
+  path:
+    type: string
+  content:
+    type: string
+
+permissions:
+  - filesystem.write
+
+verification:
+  - file_exists
+  - content_matches
