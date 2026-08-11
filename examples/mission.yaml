@@ -1,0 +1,22 @@
+mission:
+  name: deploy-web-app
+  autonomy: governed
+
+budget:
+  max_runtime_minutes: 30
+  max_tool_calls: 100
+
+steps:
+  - inspect_environment
+  - retrieve_source
+  - install_dependencies
+  - run_tests
+  - build
+  - deploy
+  - health_check
+  - verify
+
+on_failure:
+  strategy: bounded_recovery
+  max_retries: 2
+  escalation: human
