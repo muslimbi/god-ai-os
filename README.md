@@ -4,64 +4,56 @@
 
 > An open-source, governed AI operating environment for goal-driven autonomous agents.
 
-GOD AI OS is a proposed agent operating architecture that sits above a conventional operating system and an AI-agent kernel such as AIOS. It lets users express goals in natural language and enables agents to plan, execute, verify, recover, and report actions across computers, networks, APIs, cloud infrastructure, and enterprise systems.
+GOD AI OS is a proposed agent operating architecture that sits above a conventional operating system and an AI-agent runtime such as AIOS. Users express outcomes in natural language; agents plan, delegate, execute, verify, recover, and report actions across computers, networks, APIs, cloud infrastructure, and enterprise systems.
 
 ### Core Principle
 
 **Think freely, execute through capabilities, verify everything, and remain governed.**
 
 ```text
-User Goal
-   ↓
-Intent → Context → Plan
-   ↓
-Policy / Authorization
-   ↓
-Capability → Tool → Execution
-   ↓
-Observation → Verification
-   ↓
-Recovery / Adaptation
-   ↓
-Verified Outcome → Report
+User Goal → Intent → Plan → Policy → Capability → Execution
+                                      ↓
+                              Observation → Verification
+                                      ↓
+                           Recovery / Adaptation → Report
 ```
-
-## Why GOD AI OS?
-
-Traditional software requires users to know commands, applications, APIs, and workflows. Agent frameworks can reason and call tools, but production autonomy also requires scheduling, permissions, state, verification, recovery, auditability, and resource governance.
-
-GOD AI OS adds those control-plane capabilities while reusing existing operating-system and agent-runtime infrastructure.
 
 ## Architecture
 
 ```text
-┌──────────────────────────────────────────────┐
-│                    USER                      │
-│          Text / Voice / GUI / API            │
-└──────────────────────┬───────────────────────┘
-                       ▼
-┌──────────────────────────────────────────────┐
-│               GOD CONTROLLER                 │
-│ Intent • Goals • Planning • Delegation       │
-└──────────────────────┬───────────────────────┘
-                       ▼
-┌──────────────────────────────────────────────┐
-│                  AIOS LAYER                  │
-│ Scheduler • Context • Memory • Storage       │
-│ LLM • Tool Management • Agent SDK             │
-└──────────────────────┬───────────────────────┘
-                       ▼
-┌──────────────────────────────────────────────┐
-│              GOD OS CONTROL PLANE            │
-│ Capability • Execution • Verification        │
-│ Policy • Recovery • Mission • Audit          │
-└──────────────────────┬───────────────────────┘
-                       ▼
-┌───────────────┬──────────────┬───────────────┐
-│   COMPUTER    │   NETWORK    │      API      │
-│ Browser/CLI   │ Router/SSH   │ Git/CRM/ERP   │
-│ Docker/Files  │ Firewall     │ Cloud/DB      │
-└───────────────┴──────────────┴───────────────┘
+                         USER
+                           │
+                           ▼
+                    ┌─────────────┐
+                    │ GOD CONTROL │
+                    │    PLANE    │
+                    └──────┬──────┘
+                           │
+                Intent / Goal / Mission
+                           │
+                           ▼
+                    Planner + Delegation
+                           │
+             ┌─────────────┼─────────────┐
+             ▼             ▼             ▼
+       Software Agent  Computer Agent  Network Agent
+             │             │             │
+        HyperAgent      HyperAgent     Custom Agent
+             └─────────────┼─────────────┘
+                           ▼
+                  Capability Registry
+                           ▼
+                Policy / Approval / Audit
+                           ▼
+                  Universal Tool Gateway
+                           ▼
+                  Sandbox / Execution
+                           ▼
+                    Verification
+                           ▼
+                 Recovery / Self-Healing
+                           ▼
+                        REPORT
 ```
 
 ## Key Components
@@ -77,6 +69,7 @@ GOD AI OS adds those control-plane capabilities while reusing existing operating
 - Self-Healing Engine
 - Policy & Permission Engine
 - Agent Delegation Engine
+- HyperAgent Integration Layer
 - Workflow Engine
 - Model Router
 - Sandbox Manager
@@ -87,6 +80,20 @@ GOD AI OS adds those control-plane capabilities while reusing existing operating
 - Observability & Audit Engine
 - Report Generator
 
+## Full Project Plan
+
+See [`PROJECT_PLAN.md`](PROJECT_PLAN.md) for the product vision, technical stack, phased implementation plan, MVP definition of done, success metrics, and non-goals.
+
+## Tool & Application Ecosystem
+
+See [`docs/TOOL_AND_APPLICATION_CATALOG.md`](docs/TOOL_AND_APPLICATION_CATALOG.md) for the planned tool/application ecosystem covering operating systems, AI runtimes, development, DevOps, cloud, networking, observability, databases, messaging, business systems, telecom, browser/computer use, documents, security, and API protocols.
+
+## Execution Fabric
+
+See [`docs/architecture/execution-fabric.md`](docs/architecture/execution-fabric.md) and [`docs/architecture/reference-stack.md`](docs/architecture/reference-stack.md).
+
+HyperAgent is integrated as a **specialist execution runtime**, not as the top-level controller. See [`docs/integrations/hyperagent.md`](docs/integrations/hyperagent.md).
+
 ## Repository Map
 
 ```text
@@ -94,12 +101,14 @@ god-ai-os/
 ├── docs/
 │   ├── architecture/
 │   ├── components/
+│   ├── integrations/
 │   ├── security/
 │   ├── development/
 │   ├── examples/
 │   └── adr/
 ├── examples/
 ├── README.md
+├── PROJECT_PLAN.md
 ├── ARCHITECTURE.md
 ├── COMPONENTS.md
 ├── SECURITY.md
@@ -114,7 +123,7 @@ god-ai-os/
 
 **Status: Architecture / Research Prototype**
 
-The repository documentation defines the target architecture. It is not a claim that all components are production-ready.
+The repository defines the target architecture and integration plan. Components marked as planned are not claimed to be production-ready.
 
 ## Roadmap
 
@@ -122,10 +131,11 @@ The repository documentation defines the target architecture. It is not a claim 
 2. Capability and tool fabric
 3. Autonomous execution and verification
 4. Governance and security
-5. Computer and network automation
-6. Self-healing and long-running missions
-7. Enterprise integrations
-8. Distributed multi-agent operation
+5. HyperAgent and specialist-agent integration
+6. Computer and network automation
+7. Self-healing and long-running missions
+8. Enterprise integrations
+9. Distributed multi-agent operation
 
 See [`ROADMAP.md`](ROADMAP.md).
 
@@ -133,6 +143,8 @@ See [`ROADMAP.md`](ROADMAP.md).
 
 - AIOS: https://github.com/agiresearch/AIOS
 - Cerebrum: https://github.com/agiresearch/Cerebrum
+- FSoft-AI4Code HyperAgent: https://github.com/FSoft-AI4Code/HyperAgent
+- Hyperbrowser HyperAgent: https://github.com/hyperbrowserai/HyperAgent
 - AIOS paper: https://arxiv.org/abs/2403.16971
 
 ## License
